@@ -3,6 +3,7 @@ import Icon from "@/components/media/Icon.astro";
 import NavLink from "@/components/global/NavLink.astro";
 import logo from "@/assets/logo/logo.svg";
 import { SITE_NAME } from "@/consts.ts";
+import { NAV_ITEMS } from "@/data/business.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -32,8 +33,9 @@ const { render = true, overlap = false } = Astro.props;
       <nav class="nav_menu" id="nav-menu" aria-label="Main">
         <div class="nav_menu_inner">
           <ul class="nav_links">
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/example-components">Example Components</NavLink>
+            {NAV_ITEMS.map((item) => (
+              <NavLink href={item.href}>{item.label}</NavLink>
+            ))}
           </ul>
         </div>
       </nav>

@@ -84,8 +84,9 @@ that as a prop on `Section` following the New component checklist, not a wrapper
 
 ### Nav (`src/components/global/Nav.astro`)
 
-- Replace the placeholder links with the list. Links are `/#about`, not bare
-  `#about`, so they keep working from subpages.
+- Nav and Footer already map over `NAV_ITEMS` in `src/data/business.ts`. Edit
+  the list, not the components. Links are `/#about`, not bare `#about`, so they
+  keep working from subpages.
 - Smooth scrolling is CSS: `scroll-behavior: smooth` on `html` inside
   `@media (prefers-reduced-motion: no-preference)`, in `src/styles/`. Check
   `global.css` and `base.css` for an existing rule first.
@@ -99,14 +100,11 @@ that as a prop on `Section` following the New component checklist, not a wrapper
 
 ### Footer (`src/components/global/Footer.astro`)
 
-- Logo and a one-sentence description
-- Nav links, mirroring the main nav from the same list
-- Contact block: `tel:` phone, `mailto:` email, address
-- Opening hours
-- Social links, placeholder `#` hrefs until the client supplies URLs. Render
-  only platforms the client has. Each gets `aria-label` and
-  `rel="noopener noreferrer"`
-- Copyright (already present), plus Privacy and Terms links if those pages exist
+The Footer already reads `BUSINESS`, `SOCIALS` and `NAV_ITEMS` and renders the
+logo, tagline, nav links, `tel:`/`mailto:` contact block, opening hours, social
+links and copyright. Edit the data, not the markup. Placeholder socials use `#`
+hrefs until the client supplies URLs; remove platforms the client lacks. Add
+Privacy and Terms links to `NAV_ITEMS` or the footer if those pages exist.
 
 ### Multiple pages
 

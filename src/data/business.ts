@@ -1,8 +1,8 @@
 export interface NavItem {
   /** Visible label. */
   label: string;
-  /** Section id on the landing page, or a path for a separate page. */
-  target: string;
+  /** Destination: `/#id` for a landing page section, or a path for a separate page. */
+  href: string;
 }
 
 export interface Social {
@@ -37,11 +37,11 @@ export const SOCIALS: Social[] = [
   { platform: "Google Business", href: "#" },
 ];
 
-/** One list for the nav and footer. Each target matches a section id on the landing page. */
+/** One list for the nav and footer. Section links use `/#id` so they also work from subpages. */
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Home", target: "home" },
-  { label: "About", target: "about" },
-  { label: "Services", target: "services" },
-  { label: "Products", target: "products" },
-  { label: "Contact", target: "contact" },
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Products", href: "/#products" },
+  { label: "Contact", href: "/#contact" },
 ];

@@ -2,6 +2,7 @@
 import Icon from "@/components/media/Icon.astro";
 import logo from "@/assets/logo/logo.svg";
 import { SITE_NAME } from "@/consts.ts";
+import { BUSINESS, SOCIALS, NAV_ITEMS } from "@/data/business.ts";
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -9,6 +10,9 @@ interface Props {
 }
 
 const { render = true } = Astro.props;
+
+const { phone, email, address, hours, tagline } = BUSINESS;
+const phoneHref = `tel:${phone.replace(/[^\d+]/g, "")}`;
 ---
 
 {render && (
@@ -18,20 +22,51 @@ const { render = true } = Astro.props;
         <a class="footer_logo" href="/" aria-label={SITE_NAME}>
           <Icon src={logo} variant="full-width" />
         </a>
+        <p class="footer_tagline text-style-small">{tagline}</p>
+      </div>
+      <div class="footer_columns">
         <nav aria-label="Footer">
           <ul class="footer_links">
-            <li>
-              <a class="footer_link" href="/">
-                Home
-              </a>
-            </li>
-            <li>
-              <a class="footer_link" href="/example-components">
-                Example Components
-              </a>
-            </li>
+            {NAV_ITEMS.map((item) => (
+              <li>
+                <a class="footer_link" href={item.href}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
+        <address class="footer_contact text-style-small">
+          <a class="footer_link" href={phoneHref}>{phone}</a>
+          <a class="footer_link" href={`mailto:${email}`}>{email}</a>
+          <span>
+            {address.street}, {address.city}, {address.region}
+            {address.postalCode}
+          </span>
+        </address>
+        <ul class="footer_hours text-style-small">
+          {hours.map((row) => (
+            <li>
+              <span>{row.days}</span> <span>{row.time}</span>
+            </li>
+          ))}
+        </ul>
+        {SOCIALS.length > 0 && (
+          <ul class="footer_socials">
+            {SOCIALS.map((social) => (
+              <li>
+                <a
+                  class="footer_link"
+                  href={social.href}
+                  rel="noopener noreferrer"
+                  aria-label={social.platform}
+                >
+                  {social.platform}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div class="footer_bottom">
         <p class="footer_copyright text-style-small">
@@ -91,13 +126,35 @@ const { render = true } = Astro.props;
       }
     }
 
-    .footer_links {
+    .footer_tagline {
+      color: var(--text-2);
+      max-width: 40ch;
+    }
+
+    .footer_columns {
+      display: grid;
+      gap: var(--space-6);
+      @media (width >= 48rem) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .footer_links,
+    .footer_socials,
+    .footer_hours,
+    .footer_contact {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--space-4);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2);
+      font-style: normal;
       font-size: var(--text-small);
       font-weight: var(--primary-medium);
+    }
+
+    .footer_hours,
+    .footer_contact {
+      color: var(--text-2);
     }
 
     .footer_link {
