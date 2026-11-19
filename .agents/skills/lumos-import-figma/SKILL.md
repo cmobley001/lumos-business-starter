@@ -24,7 +24,7 @@ the values this system uses.
 | `32px` | `2rem` | ÷ 16 |
 | line height `70px` on a `64px` size | `1.094` | line height ÷ font size |
 | letter spacing `-2.4px` on an `80px` size | `-0.03em` | letter spacing ÷ font size, or % ÷ 100 |
-| `#FFFFFF` at 60% opacity | `color-mix(in lab, var(--light-100) 60%, transparent)` | alpha becomes the mix percentage |
+| `#FFFFFF` at 60% opacity | `color-mix(in lab, var(--primary-100) 60%, transparent)` | alpha becomes the mix percentage |
 
 One refinement on the last row. If the faded hex is whatever a theme uses for
 `--text`, the answer is `currentcolor`, not that swatch — otherwise the muted
